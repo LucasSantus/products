@@ -2,8 +2,92 @@
     "openapi": "3.0.0",
     "info": {
         "title": "products",
-        "description": "Desafio de aprendizagem NodeJS, TypeScript, Swagger",
+        "description": "Essa API tem como objetivo a manipulação de produtos.",
+        "termsOfService": "http://localhost:3000/terms",
         "contact": {},
         "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/v1",
+            "description": "API de teste"
+        }
+    ],
+    "paths": {
+        "/products":{
+            "post":{
+                "summary": "Cadastro de Produto",
+                "description": "Rota responsável pelo registro de novo produto.",
+                "tags": ["Products"],
+                "security": [{"bearerAuth": []}],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Product"
+                            },
+                            "examples":{
+                                "product":{
+                                    "value":{
+                                        "name": "Teclado Mecânico T-Dagger Bora",
+                                        "description": "Teclado Mecânico Gamer T-Dagger Bora, RGB, Switch Outemu Blue, ABNT2 - T-TGK315-BLUE",
+                                        "price": 199
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "400": {
+                        "description": "Product Already Exists!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitSchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
     }
+
 }
