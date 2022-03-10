@@ -1,0 +1,9 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "products",
+        "description": "Desafio de aprendizagem NodeJS, TypeScript, Swagger",
+        "contact": {},
+        "version": "1.0.0"
+    }
+}
